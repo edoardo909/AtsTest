@@ -38,8 +38,8 @@ public class AtsRepository implements IService {
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			List<ATM> data = mapper.readValue(in, new TypeReference<List<ATM>>(){});
-			logger.info(String.format("CONTENT %s", data.get(0).getAddress()));
-			logger.info(String.format("CONTENT %s", data.get(1)));
+//			logger.info(String.format("CONTENT %s", data.get(0).getAddress()));
+//			logger.info(String.format("CONTENT %s", data.get(1)));
 
 			return data;
 
@@ -56,6 +56,7 @@ public class AtsRepository implements IService {
 	}
 
 	public ATM findByString(String element) {
+		logger.info("TEST " + listElements().get(element.indexOf(element)));
 		return listElements().get(element.indexOf(element));
 	}
 
