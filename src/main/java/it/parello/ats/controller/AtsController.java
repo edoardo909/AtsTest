@@ -5,9 +5,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,21 +31,27 @@ public class AtsController {
 	@Autowired
 	private AtsService service;
 	
-	@RequestMapping("/")
+	
+	@RequestMapping(value = {"/", "/login"})
 	public String login(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
+		List<ATM> element = service.listElements();
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
+		model.addAttribute("collection", element);
 		model.addAttribute("serverTime", formattedDate );
 		return "home";
 	}
 	
-	@RequestMapping("/main")
-	public String searchPage(Model model) {
-		List<ATM> element = service.listElements();
-		model.addAttribute("collection", element);
-		return "searchPage";
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null) {
+			new SecurityContextLogoutHandler().logout(request, response, authentication);
+		}
+		return "redirect:login";
 	}
 	
 	@RequestMapping(value = "/search/{valore}", method = RequestMethod.GET)
@@ -50,10 +62,7 @@ public class AtsController {
 		if (atm != null) {
 			model.addAttribute("valore", search);
 			model.addAttribute("atm", atm);
-		}else {
-			model.addAttribute("css", "danger");
-			model.addAttribute("msg", "User not found");
 		}
-		return "searchPage";
+		return "home";
 	}
 }

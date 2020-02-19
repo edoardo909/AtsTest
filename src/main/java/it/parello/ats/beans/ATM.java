@@ -6,23 +6,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ATM {
 
-	@JsonProperty("address")
+	@JsonProperty
 	private Map<String,Object> address;
-	@JsonProperty("street")
+	@JsonProperty
 	private String street;
-	@JsonProperty("housenumber")
+	@JsonProperty
 	private String housenumber;
-	@JsonProperty("postalcode")
+	@JsonProperty
 	private String postalcode;
-	@JsonProperty("city")
+	@JsonProperty
 	private String city;
-	@JsonProperty("geoLocation")
+	@JsonProperty
 	private Map<String,Object> geoLocation;
-	@JsonProperty("lat")
+	@JsonProperty
 	private String lat;
-	@JsonProperty("lng")
+	@JsonProperty
 	private String lng;
-	@JsonProperty("distance")
+	@JsonProperty
 	private String distance; 
 	
 	public Map<String,Object> getAddress() {
