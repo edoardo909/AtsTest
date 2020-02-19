@@ -10,7 +10,7 @@
 		<h1>Homepage</h1>
 		<P>The time is ${serverTime}.</P>
 		<div>
-			<a href="/AtsTest/ats/searchpage">Enter</a>
+			<a href="/AtsTest/ats/search">Enter</a>
 		</div>
 	</div>
 </body>

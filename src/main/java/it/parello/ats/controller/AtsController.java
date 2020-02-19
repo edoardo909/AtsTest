@@ -2,6 +2,7 @@ package it.parello.ats.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import it.parello.ats.beans.ATM;
 
 
 @Controller
@@ -32,9 +35,10 @@ public class AtsController {
 		return "home";
 	}
 	
-	@RequestMapping("/ats/searchpage")
+	@RequestMapping("/ats/search")
 	public String searchPage(Model model) {
-		//TODO: implementare qualcosa?
+		List<ATM> element = service.listElements();
+		model.addAttribute("collection", element);
 		return "searchPage";
 	}
 	
