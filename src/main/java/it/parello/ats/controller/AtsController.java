@@ -34,13 +34,8 @@ public class AtsController {
 	
 	@RequestMapping(value = {"/", "/login"})
 	public String login(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
 		List<ATM> element = service.listElements();
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		String formattedDate = dateFormat.format(date);
 		model.addAttribute("collection", element);
-		model.addAttribute("serverTime", formattedDate );
 		return "home";
 	}
 	
@@ -54,14 +49,12 @@ public class AtsController {
 		return "redirect:login";
 	}
 	
-	@RequestMapping(value = "/search/{valore}", method = RequestMethod.GET)
-	public String resultPage(@RequestParam (value = "valore" , required  = false) String search, Model model) {
-		logger.info(String.format("search string %s", search));
-		
-		ATM atm = service.findByString(search);
-		if (atm != null) {
-			model.addAttribute("valore", search);
-			model.addAttribute("atm", atm);
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String resultPage(@RequestParam (value = "search" , required  = false) String search, Model model) {
+		List<ATM> element = service.findByString(search);
+		if (element != null) {
+			model.addAttribute("search", search);
+			model.addAttribute("collection", element);
 		}
 		return "home";
 	}

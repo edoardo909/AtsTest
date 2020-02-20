@@ -10,9 +10,6 @@
 	<http use-expressions="true">
 
 		<intercept-url pattern="/**" access="isAuthenticated()" />
-
-		<form-login 
-			authentication-failure-url="/404" />
 		<logout logout-success-url="/logout" />
 	</http>
 
@@ -21,11 +18,7 @@
 			<user-service>
 				<user name="admin" password="password" authorities="ROLE_USER" />
 			</user-service>
-			<!-- <password-encoder ref="encoder" /> -->
 		</authentication-provider>
 	</authentication-manager>
 
-	<!-- <beans:bean id="encoder"
-		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-	</beans:bean> -->
 </beans:beans>

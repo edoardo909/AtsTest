@@ -7,7 +7,6 @@
 </head>
 <body>
 	<div class="container" align="center">
-		<P>The time is ${serverTime}.</P>
 		<div>
 			<h1>Login</h1>
 			<form th:action="@{/home}" method="post" role="form"
