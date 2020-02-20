@@ -1,5 +1,7 @@
 Project name: AtsTest
 
+github url: https://github.com/edoardo909/AtsTest
+
 This project was built using the Eclipse IDE for Enterprise Java Developers Version: 2019-09 R (4.13.0) and runs on a vanilla instance of apache tomcat 7 (version apache-tomcat-7.0.47).
 It's a simple spring web application with a login page and a main homepage with a search bar.
 I used older versions of various dependancies as these were the last versions I have worked with.
@@ -16,6 +18,7 @@ ATM.java - bean used to handle the incoming data
 I have also implemented a simple login/logout feature with the help of spring security:
 all urls except for the root are intercepted and redirected to the login page, unless you have the proper credentials and/or open session.
 To login you may use the following credentials: 
+
 username: admin
 password: password
 
